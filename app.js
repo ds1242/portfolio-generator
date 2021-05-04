@@ -9,7 +9,11 @@ const generatePage = require('./src/page-template.js');
 
 //     console.log('Portfolio Complete! checkout index.html to see the output!');
 // })
-
+const mockData = {
+    name: 'Lernatino',
+    github: 'Lernatino',
+    projects: []
+}
 const promptUser = () => {
     return inquirer.prompt([
         {
@@ -41,7 +45,7 @@ const promptUser = () => {
         {
             type: 'confirm',
             name: 'confirmAbout',
-            message: 'WOuld you like to enter some information about yourselft for an "About" section?',
+            message: 'Would you like to enter some information about yourselft for an "About" section?',
             default: true
         },
         {
@@ -142,9 +146,10 @@ promptUser()
     .then(promptProject)
     .then(portfolioData => {
         const pageHTML = generatePage(portfolioData);
+        // const pageHTML = generatePage(mockData);
 
-        // fs.writeFile('./index.html',pageHTML, err => {
-        //     if(err) throw new Error(err);
-        // })
+        fs.writeFile('./index.html',pageHTML, err => {
+            if(err) throw new Error(err);
+        })
     });
     
