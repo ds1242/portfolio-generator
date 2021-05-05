@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./src/page-template.js');
+const { writeFile, copyFile } = require('node:fs');
 
 // const pageHTML = generatePage(name, github);
 
@@ -145,11 +146,39 @@ const promptProject = portfolioData => {
 promptUser()
     .then(promptProject)
     .then(portfolioData => {
-        const pageHTML = generatePage(portfolioData);
+        return generatePage(portfolioData);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .then(copyFileResponse => {
+        console.log(copyFileResponse);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
         // const pageHTML = generatePage(mockData);
 
-        fs.writeFile('./index.html',pageHTML, err => {
-            if(err) throw new Error(err);
-        })
-    });
+    //     fs.writeFile('./dist/index.html',pageHTML, err => {
+    //         // if(err) throw new Error(err);
+    //         if (err){
+    //             console.log(err);
+    //             return;
+    //         }
+    //         console.log("Page created! Check out index.html in this directory to see it!");
+
+    //         fs.copyFile('./src/style.css', './dist/style.css', err => {
+    //             if(err){
+    //                 console.log(err)
+    //                 return;
+    //             }
+    //             console.log('Style sheet copied successfully!');
+    //         });
+    //     });
+    // });
     
