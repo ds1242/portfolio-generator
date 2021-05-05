@@ -31,13 +31,8 @@ const copyFile = () => {
                 ok:true,
                 message: 'Stylesheet copied'
             });
-            //             if(err){
-            //                 console.log(err)
-            //                 return;
-            //             }
-            //             console.log('Style sheet copied successfully!');
         })
     })
 };
 
-mod
+module.exports = { writeFile, copyFile };
